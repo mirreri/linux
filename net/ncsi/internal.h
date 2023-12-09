@@ -103,11 +103,13 @@ enum {
 #define MLX_MAC_ADDR_OFFSET             8
 #define INTEL_MAC_ADDR_OFFSET           1
 
+/* Channel Firmware Version */
+#define NCSI_CHANNEL_FW_NAME_LENGTH		12
 
 struct ncsi_channel_version {
 	u32 version;		/* Supported BCD encoded NCSI version */
 	u32 alpha2;		/* Supported BCD encoded NCSI version */
-	u8  fw_name[12];	/* Firmware name string                */
+	u8  fw_name[NCSI_CHANNEL_FW_NAME_LENGTH];	/* Firmware name string                */
 	u32 fw_version;		/* Firmware version                   */
 	u16 pci_ids[4];		/* PCI identification                 */
 	u32 mf_id;		/* Manufacture ID                     */
