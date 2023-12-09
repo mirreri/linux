@@ -62,6 +62,7 @@ static int ncsi_write_channel_info(struct sk_buff *skb,
 	struct ncsi_channel_mode *m;
 	struct nlattr *vid_nest;
 	int i;
+	unsigned char fw_name[NCSI_CHANNEL_FW_NAME_LENGTH + 1] = {0};
 
 	nla_put_u32(skb, NCSI_CHANNEL_ATTR_ID, nc->id);
 	m = &nc->modes[NCSI_MODE_LINK];
@@ -73,6 +74,8 @@ static int ncsi_write_channel_info(struct sk_buff *skb,
 
 	nla_put_u32(skb, NCSI_CHANNEL_ATTR_VERSION_MAJOR, nc->version.version);
 	nla_put_u32(skb, NCSI_CHANNEL_ATTR_VERSION_MINOR, nc->version.alpha2);
+
+	memcpy (fw_name, nc->version.fw_name, NCSI_CHANNEL_FW_NAME_LENGTH);
 	nla_put_string(skb, NCSI_CHANNEL_ATTR_VERSION_STR, nc->version.fw_name);
 
 	vid_nest = nla_nest_start_noflag(skb, NCSI_CHANNEL_ATTR_VLAN_LIST);
